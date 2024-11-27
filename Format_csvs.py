@@ -95,8 +95,8 @@ def read_Cols(transaction_filename='train_transaction.csv', id_filename='train_i
     sys.stdout.flush()
     t2 = time.time()
     df_total = pd.merge(df_id, df_trans, how='outer')
-    X_train = df_total.drop(columns=['TransactionID', 'isFraud'])
-    Y_train = df_total['isFraud']
+    X_train = df_total.drop(columns=['TransactionID', 'isFraud'] if 'isFraud' in df_total.columns else ['TransactionID'])
+    Y_train = df_total['isFraud'] if 'isFraud' in df_total.columns else None
 
 
     # Pull non numerical columns

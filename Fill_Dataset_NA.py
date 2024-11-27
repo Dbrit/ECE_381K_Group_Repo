@@ -20,10 +20,10 @@ print('Reading in df...')
 sys.stdout.flush()
 df = pd.read_csv(combined_filename)
 
-Y = df[['TransactionID', 'isFraud']].copy()
+Y = df[['TransactionID', 'isFraud'] if 'isFraud' in df.columns else ['TransactionID']].copy()
 
 
-X = df.drop('TransactionID', axis=1).drop('isFraud', axis=1)
+X = df.drop('TransactionID', axis=1).drop('isFraud', axis=1) if 'isFraud' in df.columns else df.drop('TransactionID', axis=1)
 
 print('Finding numerical/non numerical columns...')
 sys.stdout.flush()
